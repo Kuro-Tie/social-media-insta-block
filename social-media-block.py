@@ -1,5 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
+from python_hosts import Hosts, HostsEntry
+
+class HostBlockblock():
+    def __init__(self):
+        my_hosts = Hosts()
+        new_entry = HostsEntry(entry_type='ipv4', address='1.2.3.4', names=['example.com', 'example'])
+        my_hosts.add([new_entry])
+        my_hosts.write(True)
+
+class HostBlockUnblock():
+    def __init__(self):
+        my_hosts = Hosts()
+        my_hosts.remove_all_matching(address='1.2.3.4')
+        my_hosts.write(True)
 
 class GUIApp(tk.Tk):
     def __init__(self,mytitle,size):
@@ -21,8 +35,8 @@ class Menu(ttk.Frame):
 
     def create_widgets(self):
         self.Label_text = ttk.Label(self, text="Instagram Blocker!",font=('Helvetica',18), background="orange")
-        self.Block_button = ttk.Button(self, text="Block")
-        self.UNBlock_button = ttk.Button(self, text="Unblock")
+        self.Block_button = ttk.Button(self, text="Block",command=HostBlockUnblock)
+        self.UNBlock_button = ttk.Button(self, text="Unblock",command=HostBlockUnblock)
         self.CodedByText = ttk.Label(self, text="Coded By Kuro-Tie",font=('Helvetica',18), background="purple")
     def create_layout(self):
         self.columnconfigure((0,1,2), weight = 1, uniform = 'a')
@@ -31,4 +45,4 @@ class Menu(ttk.Frame):
         self.Block_button.grid(row=1,column=0,sticky='nswe',columnspan=2)
         self.UNBlock_button.grid(row=1,column=2,sticky='nswe',columnspan=2)
         self.CodedByText.grid(row=2,column=0,columnspan=4,sticky='nswe')
-GUIApp("Instagram Blocker", (210,120))
+GUIApp("Blockr", (210,120))
