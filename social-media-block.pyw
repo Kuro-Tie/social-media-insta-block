@@ -5,14 +5,17 @@ from python_hosts import Hosts, HostsEntry
 class HostBlockblock():
     def __init__(self):
         my_hosts = Hosts()
-        new_entry = HostsEntry(entry_type='ipv4', address='1.2.3.4', names=['example.com', 'example'])
+        new_entry = HostsEntry(entry_type='ipv4', address='127.0.0.1', names=['instagram.com', 'example'])
+        new_entry2 = HostsEntry(entry_type='ipv4',address='127.0.0.1', names=['www.instagram.com','example2'])
         my_hosts.add([new_entry])
+        my_hosts.add([new_entry2])
         my_hosts.write()
 
 class HostBlockUnblock():
     def __init__(self):
         my_hosts = Hosts()
-        my_hosts.remove_all_matching(address='1.2.3.4')
+        my_hosts.remove_all_matching(name='instagram.com')
+        my_hosts.remove_all_matching(name='www.instagram.com')
         my_hosts.write()
 
 class GUIApp(tk.Tk):
@@ -35,7 +38,7 @@ class Menu(ttk.Frame):
 
     def create_widgets(self):
         self.Label_text = ttk.Label(self, text="Instagram Blocker!",font=('Helvetica',18), background="orange")
-        self.Block_button = ttk.Button(self, text="Block",command=HostBlockUnblock)
+        self.Block_button = ttk.Button(self, text="Block",command=HostBlockblock)
         self.UNBlock_button = ttk.Button(self, text="Unblock",command=HostBlockUnblock)
         self.CodedByText = ttk.Label(self, text="Coded By Kuro-Tie",font=('Helvetica',18), background="purple")
     def create_layout(self):
